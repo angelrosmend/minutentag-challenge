@@ -15,7 +15,7 @@ export default function App() {
       <Message />
       <br />
       <h3>'FocusableInput' test</h3>
-      <FocusableInput />
+      <FocusableInput focusable/>
       <br />
       <h3>'ImageGallery' test</h3>
       <ImageGallery />
