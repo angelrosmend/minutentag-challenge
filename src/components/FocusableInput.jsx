@@ -7,7 +7,7 @@
  * - If on mounting the focused prop is true, the input should receive the focus.
  */
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, Fragment } from "react";
 
 function Input(props) {
 	const { forwardedRef, ...otherProps } = props;
@@ -23,11 +23,19 @@ const TextInput = React.forwardRef((props, ref) => {
 // and the input is not focused, it should receive focus.
 // If focused prop is true, the input should receive the focus.
 
-export function FocusableInput({ focusable = false }) {
-	const inputRef = useRef(null);
-	useEffect(() => {
-		focusable && inputRef.current.focus()
-	}, [focusable, inputRef]);
+export function FocusableInput({ focusable = false, setFocusable }) {
+  const inputRef = useRef(null);
 
-	return <TextInput ref={inputRef}/>;
+  useEffect(() => {
+    focusable && inputRef.current.focus();
+  }, [focusable, inputRef]);
+
+  return (
+    <Fragment>
+      <TextInput ref={inputRef} />
+      <button onClick={() => setFocusable((focusable) => !focusable)}>
+        Focus
+      </button>
+    </Fragment>
+  );
 }

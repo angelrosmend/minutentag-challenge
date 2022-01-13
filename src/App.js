@@ -6,8 +6,10 @@ import { PlayerStatus } from "./components/PlayerStatus";
 import { TeamsList } from "./components/TeamsList";
 
 import './App.css';
+import { useState } from "react";
 
 export default function App() {
+  const [focusable, setFocusable] = useState(false)
   return (
     <div className="App">
       {/* Render here each component from the "components" directory */}
@@ -15,7 +17,7 @@ export default function App() {
       <Message />
       <br />
       <h3>'FocusableInput' test</h3>
-      <FocusableInput focusable/>
+      <FocusableInput focusable={focusable} setFocusable={setFocusable}/>
       <br />
       <h3>'ImageGallery' test</h3>
       <ImageGallery />
