@@ -9,6 +9,7 @@ import './App.css';
 import { useState } from "react";
 import { Grocery } from "./components/Grocery";
 import { productsList } from "./utils/products";
+import { imgLinks } from "./utils/imageLinks";
 
 export default function App() {
   const [focusable, setFocusable] = useState(true)
@@ -25,7 +26,7 @@ export default function App() {
       <FocusableInput focusable={focusable} setFocusable={setFocusable}/>
       <br />
       <h3>'ImageGallery' test</h3>
-      <ImageGallery />
+      <ImageGallery links={imgLinks}/>
       <br />
       <h3>'PlayerStatus' test</h3>
       <PlayerStatus />
