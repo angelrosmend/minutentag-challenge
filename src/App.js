@@ -16,28 +16,28 @@ export default function App() {
   const [focusable, setFocusable] = useState(true)
   const [products, setProducts] = useState(productsList)
   return (
-    <div className="App">
+    <div style={{display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center"}}>
       {/* Render here each component from the "components" directory */}
       <h3>Rating</h3>
       <Rating/>
       <br/>
+      <hr/>
       <h3>'Message' test</h3>
       <Message />
-      <br />
+      <br /><hr/>
       <h3>'FocusableInput' test</h3>
       <FocusableInput focusable={focusable} setFocusable={setFocusable}/>
-      <br />
-      
-      <br />
+      <br /><hr/>
       <h3>'PlayerStatus' test</h3>
       <PlayerStatus />
-      <br />
+      <br /><hr/>
       <h3>'TeamsList' test</h3>
       <TeamsList />
-      <br/>
+      <br/><hr/>
       <h3>Grocery</h3>
       <Grocery products={products} setProducts={setProducts}/>
-      <br/>
+      <br/> 
+      <hr/>
       <h3>'ImageGallery' test</h3>
       <ImageGallery links={imgLinks}/>
     </div>

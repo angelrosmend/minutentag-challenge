@@ -11,9 +11,9 @@ import { useState } from "react";
 
 function Image({ src, onRemove }) {
 	return (
-		<div class="image">
-			<img src={src} alt=""/>
-			<button onClick={()=> onRemove(src)} class="remove">X</button>
+		<div class="image" style={{position: "relative"}}>
+			<button style={{position: "absolute", top: "10px", right: "10px", cursor: "pointer"}} onClick={()=> onRemove(src)} class="remove">X</button>
+			<img src={src} width="250" alt=""/>
 		</div>
 	);
 }
@@ -29,7 +29,7 @@ export function ImageGallery({ links }) {
 	if(!links || links.lenght < 1) return null
 
 	return (
-		<div>
+		<div style={{display: "grid",  gridTemplateColumns: "repeat(3, 1fr)"}}>
 			{images.map(( link => <Image key={link} src={link} onRemove={handleRemove}/>))}
 		</div>
 	);
