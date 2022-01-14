@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Grocery } from "./components/Grocery";
 import { productsList } from "./utils/products";
 import { imgLinks } from "./utils/imageLinks";
+import { Rating } from "./components/Rating";
 
 export default function App() {
   const [focusable, setFocusable] = useState(true)
@@ -17,22 +18,28 @@ export default function App() {
   return (
     <div className="App">
       {/* Render here each component from the "components" directory */}
-      <h3>Grocery</h3>
-      <Grocery products={products} setProducts={setProducts}/>
+      <h3>Rating</h3>
+      <Rating/>
+      <br/>
       <h3>'Message' test</h3>
       <Message />
       <br />
       <h3>'FocusableInput' test</h3>
       <FocusableInput focusable={focusable} setFocusable={setFocusable}/>
       <br />
-      <h3>'ImageGallery' test</h3>
-      <ImageGallery links={imgLinks}/>
+      
       <br />
       <h3>'PlayerStatus' test</h3>
       <PlayerStatus />
       <br />
       <h3>'TeamsList' test</h3>
       <TeamsList />
+      <br/>
+      <h3>Grocery</h3>
+      <Grocery products={products} setProducts={setProducts}/>
+      <br/>
+      <h3>'ImageGallery' test</h3>
+      <ImageGallery links={imgLinks}/>
     </div>
   );
 }

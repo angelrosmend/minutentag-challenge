@@ -24,6 +24,50 @@
  * </div>
  */
 
+import { useCallback, useMemo, useState } from "react"
+import styles from "../styles/App.module.scss"
+
 export function Rating() {
-	return null;
+  const stars = [
+    { value: 1, active: false },
+    { value: 2, active: false },
+    { value: 3, active: false },
+    { value: 4, active: false },
+    { value: 5, active: false },
+  ];
+
+  const [rating, setRating] = useState(stars);
+
+  const handleRating = (value) => {
+    const tempStars = [...stars];
+    for (let i = 0; i < value; i++) {
+      tempStars[i].active = true;
+    }
+    setRating([...tempStars]);
+  };
+
+  return (
+    <div id="rating">
+      {rating.map((rate) => {
+        return (
+          <Star
+            key={rate.value}
+            value={rate.value}
+            active={rate.active}
+            onRate={handleRating}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function Star({value, active, onRate}){
+	return (
+		<span className={ `${styles.starRate} ${active ? styles.active : ""} `} 
+		      onClick={()=> onRate(value)}
+			  style={{color: `${active ? "blue" : "grey"}`, 
+			          fontSize: `${active ? "1.5rem" : "1.4rem"}`,
+					  cursor: "pointer"}}> * </span>
+	)
 }
