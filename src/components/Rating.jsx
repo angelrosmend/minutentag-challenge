@@ -24,7 +24,7 @@
  * </div>
  */
 
-import { useCallback, useMemo, useState } from "react"
+import { useState } from "react"
 import styles from "../styles/App.module.scss"
 
 export function Rating() {

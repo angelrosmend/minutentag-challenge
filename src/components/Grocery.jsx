@@ -48,10 +48,10 @@ function Product(props) {
 	return (
 		<li>
 			<span>
-				{name} - votes: {votes}
+				{name} - votes: {votes} 
 			</span>
+      <button onClick={handleMinus}>-</button>
 			<button onClick={handlePlus}>+</button>
-			<button onClick={handleMinus}>-</button>
 		</li>
 	);
 }

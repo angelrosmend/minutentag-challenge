@@ -10,88 +10,62 @@
  * - Each team item should display: Team Name / Player’s quantity / Total Score of each team.
  */
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
+import { getScore } from "../helpers/getScore";
+import { TEAMS } from "../utils/teams";
 
-const TEAMS = [
-	{
-		name: "Red",
-		players: ["Robin", "Rey", "Roger", "Richard"],
-		games: [
-			{
-				score: 10,
-				city: "LA",
-			},
-			{
-				score: 1,
-				city: "NJ",
-			},
-			{
-				score: 3,
-				city: "NY",
-			},
-		],
-	},
-	{
-		name: "Blue",
-		players: ["Bob", "Ben"],
-		games: [
-			{
-				score: 6,
-				city: "CA",
-			},
-			{
-				score: 3,
-				city: "LA",
-			},
-		],
-	},
-	{
-		name: "Yellow",
-		players: ["Yesmin", "Yuliana", "Yosemite"],
-		games: [
-			{
-				score: 2,
-				city: "NY",
-			},
-			{
-				score: 4,
-				city: "LA",
-			},
-			{
-				score: 7,
-				city: "AK",
-			},
-		],
-	},
-];
 
 export function TeamsList() {
 	const [teams, setTeams] = useState(TEAMS);
 
 	// Order teams by score (highest to lowest)
 	function orderTeamByScoreHighestToLowest() {
-		// Write your code here
+		let tempTeam = [...TEAMS]
+		let sortedTeams = tempTeam.sort((lowest, highest) => getScore(highest.games) - getScore(lowest.games))
+		setTeams([...sortedTeams])
 	}
 
 	// Order teams by score (lowest to highest)
 	function orderTeamByScoreLowestToHighest() {
-		// Write your code here
+		let tempTeams = [...TEAMS]
+		let sortedTeams = tempTeams.sort((lowest, highest) => getScore(lowest.games) - getScore(highest.games))
+		setTeams([...sortedTeams])
 	}
 
 	// Filtering teams that with at least 3 players
 	function teamsWithMoreThanThreePlayers() {
-		// Write your code here
+		setTeams(()=> TEAMS.filter(team => team.players.length >= 3))
 	}
 
 	return (
 		<div>
-			<button onClick={() => setTeams(TEAMS)}>Initial list</button>
+			<button onClick={() => setTeams([...TEAMS])}>Initial list</button>
+			<button onClick={orderTeamByScoreHighestToLowest}>Highest to Lowest</button>
+			<button onClick={orderTeamByScoreLowestToHighest}>Lowest to Highest</button>
+			<button onClick={teamsWithMoreThanThreePlayers}>Teams with at least 3 players</button>
 
-			<button>Highest to Lowest</button>
-			<button>Lowest to Highest</button>
-			<button>Teams with at least 3 players</button>
+			<ul className="teams">
+				{teams && teams.map(team => {
+					return(
+						<li key={team.name} style={{display: "flex", flexDirection: "column", border: "1px solid grey"}}>
+							<h4>Team name: {team.name} </h4>
+							<p><i>Players: </i>{team.players.map(player => `${ player} `)}</p>
+							<table style={{textAlign: "center"}}>
+								<tr><h4>Games: </h4> </tr>
+								{team.games.map(game => {
+									return(
+										<Fragment>
+											<tr><td><b>Score</b></td> <td><b>Score</b></td></tr>
+											<tr><td>{game.score}</td>{game.city}<td></td></tr>
+										</Fragment>
+									)
+								})}
+							</table>
 
-			<ul className="teams">{/** Render the list of teams */}</ul>
+						</li>
+					)
+				})}
+			</ul>
 		</div>
 	);
 }
