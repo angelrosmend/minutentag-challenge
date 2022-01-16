@@ -24,6 +24,7 @@ export function ListItemsForNavigation(props) {
 
 		useEffect(()=>{
 			window.addEventListener("keydown", handleKeyDown)
+
 		},
 		[
 			// Focus the item using this effect
@@ -40,6 +41,7 @@ export function ListItemsForNavigation(props) {
 
 	return (
 		<ul onKeyDown={handleKeyDown}>
+			
 			{/** Render itemsList as you wish, probably you want to render <li></li> with the proper attributes */}
 			{/** If you have issues focusing an element, it is probably because the element is not focusable originally. Try with tabIndex={0} */}
 			{/** Do not forget to pass the reference to the selected item */}
