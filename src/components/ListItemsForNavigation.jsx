@@ -19,23 +19,24 @@ const itemsList = Array(10).fill({
 });
 
 export function ListItemsForNavigation(props) {
-	const [
-		selectedIndex,
-		setSelectedIndex,
-	] = useState(/** Initialize the state as you need */);
-	const activeItemRef = useRef();
+	const [ selectedIndex, setSelectedIndex] = useState(0);
+	const activeItemRef = useRef(0);
 
-	useEffect(
-		function () {
-			// Focus the item using this effect
+		useEffect(()=>{
+			window.addEventListener("keydown", handleKeyDown)
 		},
 		[
+			// Focus the item using this effect
 			/* Use accordingly the dependencies */
 		]
 	);
-
-	function handleKeyDown(event) {
-		// Add the proper logic to calculate the index that correspond to the item that should be focused.
+    console.log(selectedIndex)
+	function handleKeyDown(key) {
+		let goNext = key.code === "ArrowUp" || key.code ===  "ArrowRight";
+		let goBack = key.code === "ArrowDown" || key.code === "ArrowLeft";
+	    if(goNext) setSelectedIndex((prevIndex)=> prevIndex + 1)
+		if (goBack) setSelectedIndex((prevIndex) => prevIndex  - 1)
+		return;
 	}
 
 	return (
