@@ -30,7 +30,6 @@ export function ListItemsForNavigation(props) {
 			/* Use accordingly the dependencies */
 		]
 	);
-    console.log(selectedIndex)
 	function handleKeyDown(key) {
 		let goNext = key.code === "ArrowUp" || key.code ===  "ArrowRight";
 		let goBack = key.code === "ArrowDown" || key.code === "ArrowLeft";
