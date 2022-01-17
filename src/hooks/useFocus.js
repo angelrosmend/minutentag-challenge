@@ -8,11 +8,11 @@ export function useFocus(items){
 		let goBack = key.code === "ArrowDown" || key.code === "ArrowLeft";
 		if(goNext) {
 			key.preventDefault()
-			setSelectedIndex((prevIndex)=> prevIndex === items.length - 1 ? 0 : prevIndex + 1)
+			setSelectedIndex((prevIndex)=> prevIndex === items.length  ? 1 : prevIndex + 1)
 		   }
 		if (goBack) {
 			key.preventDefault()
-			setSelectedIndex((prevIndex) => prevIndex === 0 ? items.length - 1 : prevIndex  - 1)
+			setSelectedIndex((prevIndex) => prevIndex === 1 ? items.length : prevIndex  - 1)
 		}
 		return ;
 	},[selectedIndex,setSelectedIndex])
@@ -23,5 +23,5 @@ export function useFocus(items){
           document.removeEventListener("keydown", handleKeyDown, false);
         };
       }, [handleKeyDown]);
-    return [selectedIndex, setSelectedIndex] 
+    return [selectedIndex] 
 }

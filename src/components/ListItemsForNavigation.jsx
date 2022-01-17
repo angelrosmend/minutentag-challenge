@@ -11,40 +11,35 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { useFocus } from "../hooks/useFocus";
 
 // Simulating a list of items to render.
 // This can be passed through props as well. The constant is declared here for convenience
-const itemsList = Array(10).fill({
-	/** Add the properties you consider, there are no specific requirements related to what you have to render. Be creative :) */
-});
+const itemsList = [1,2,3,4,5,6,7];
 
 export function ListItemsForNavigation(props) {
-	const [ selectedIndex, setSelectedIndex] = useState(0);
-	const activeItemRef = useRef(0);
+	
+    const [selectedIndex] = useFocus(itemsList)
 
-		useEffect(()=>{
-			window.addEventListener("keydown", handleKeyDown)
-
-		},
-		[
-			// Focus the item using this effect
-			/* Use accordingly the dependencies */
-		]
-	);
-	function handleKeyDown(key) {
-		let goNext = key.code === "ArrowUp" || key.code ===  "ArrowRight";
-		let goBack = key.code === "ArrowDown" || key.code === "ArrowLeft";
-	    if(goNext) setSelectedIndex((prevIndex)=> prevIndex + 1)
-		if (goBack) setSelectedIndex((prevIndex) => prevIndex  - 1)
-		return;
-	}
-
+    if(!itemsList || itemsList.length < 1) return null
 	return (
-	<ul onKeyDown={handleKeyDown} tabIndex={0} style={{border: "1px solid black", width: "90%", height: "70px", display: "flex", justifyContent:"space-between"}}>
-
+	<ul style={{border: "1px solid black", width: "90%", height: "70px", display: "flex", justifyContent:"space-evenly", listStyle: "none"}}>
+		   { itemsList.map(index => {
+	 			return <Item key={index} index={index} focus={selectedIndex === index}/> 
+		   })}
 			{/** Render itemsList as you wish, probably you want to render <li></li> with the proper attributes */}
 			{/** If you have issues focusing an element, it is probably because the element is not focusable originally. Try with tabIndex={0} */}
 			{/** Do not forget to pass the reference to the selected item */}
-		</ul>
+	</ul>
 	);
+}
+
+function Item ({focus, index }){
+	const activeItemRef = useRef(null);
+	useEffect(()=>{
+		if(focus){
+			activeItemRef.current.focus()
+		}
+	})
+	return <li tabIndex={focus ? 0 : -1} key={index} ref={activeItemRef} style={{flex: "1", border: "1px solid black", height: "100%"}}>{index}</li>
 }

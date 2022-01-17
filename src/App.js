@@ -11,6 +11,7 @@ import { Grocery } from "./components/Grocery";
 import { productsList } from "./utils/products";
 import { imgLinks } from "./utils/imageLinks";
 import { Rating } from "./components/Rating";
+import { ListItemsForNavigation } from "./components/ListItemsForNavigation";
 
 export default function App() {
   const [focusable, setFocusable] = useState(true)
@@ -40,6 +41,9 @@ export default function App() {
       <hr/>
       <h3>'ImageGallery' test</h3>
       <ImageGallery links={imgLinks}/>
+      <br/>
+      <h3>Navigations Item</h3>
+      <ListItemsForNavigation/>
     </div>
   );
 }
