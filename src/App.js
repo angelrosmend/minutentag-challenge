@@ -6,16 +6,16 @@ import { PlayerStatus } from "./components/PlayerStatus";
 import { TeamsList } from "./components/TeamsList";
 
 import './App.css';
-import { useState } from "react";
+import { useContext } from "react";
 import { Grocery } from "./components/Grocery";
-import { productsList } from "./utils/products";
 import { imgLinks } from "./utils/imageLinks";
 import { Rating } from "./components/Rating";
 import { ListItemsForNavigation } from "./components/ListItemsForNavigation";
+import { AppContext } from "./context/AppContext";
 
 export default function App() {
-  const [focusable, setFocusable] = useState(true)
-  const [products, setProducts] = useState(productsList)
+  const {products, setProducts, focusable, setFocusable} = useContext(AppContext)
+
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center"}}>
       {/* Render here each component from the "components" directory */}
