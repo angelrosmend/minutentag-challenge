@@ -22,39 +22,8 @@
  *   </ul>
  */
 
-function Product(props) {
-	const {name, votes, onVote} = props
+import { useCallback } from "react";
 
-	function handlePlus() {
-    onVote((products) => [
-      ...products.map((product) =>
-        product.name === name
-          ? { ...product, votes: product.votes + 1 }
-          : product
-      ),
-    ]);
-  }
-
-  function handleMinus() {
-    onVote((products) => [
-      ...products.map((product) =>
-        product.name === name
-          ? { ...product, votes: product.votes - 1 }
-          : product
-      ),
-    ]);
-  }
-
-	return (
-		<li>
-			<span>
-				{name} - votes: {votes} 
-			</span>
-      <button onClick={handleMinus}>-</button>
-			<button onClick={handlePlus}>+</button>
-		</li>
-	);
-}
 
 export function Grocery({ products, setProducts }) {
   if (products.length < 1) return null;
@@ -71,4 +40,37 @@ export function Grocery({ products, setProducts }) {
       ))}
     </ul>
   );
+}
+function Product(props) {
+	const {name, votes, onVote} = props
+
+	const handlePlus= useCallback(()=> {
+    onVote((products) => [
+      ...products.map((product) =>
+        product.name === name
+          ? { ...product, votes: product.votes + 1 }
+          : product
+      ),
+    ]);
+  }, [name, onVote])
+
+  const handleMinus = useCallback(() => {
+    onVote((products) => [
+      ...products.map((product) =>
+        product.name === name
+          ? { ...product, votes: product.votes - 1 }
+          : product
+      ),
+    ]);
+  },[name, onVote])
+
+	return (
+		<li>
+			<span>
+				{name} - votes: {votes} 
+			</span>
+      <button onClick={handleMinus}>-</button>
+			<button onClick={handlePlus}>+</button>
+		</li>
+	);
 }

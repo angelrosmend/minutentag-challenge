@@ -48,10 +48,10 @@ export function TeamsList() {
 				{teams && teams.map(team => {
 					return(
 						<li key={team.name} style={{display: "flex", flexDirection: "column", border: "1px solid grey"}}>
-							<h4>Team name: {team.name} </h4>
+							<b>Team name: <span style={{color: team.name.toLowerCase()}}> {team.name} </span> </b>
 							<p><i>Players: </i>{team.players.map(player => `${ player} `)}</p>
 							<table style={{textAlign: "center"}}>
-								<tr><h4>Games: </h4> </tr>
+								<tr><b>Games: </b> </tr>
 								{team.games.map(game => {
 									return(
 										<Fragment>

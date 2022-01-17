@@ -10,15 +10,16 @@
  * NOTE: The keydown event will work once the <ul> receives the focus.
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { AppContext } from "../context/AppContext";
 import { useFocus } from "../hooks/useFocus";
 
 // Simulating a list of items to render.
 // This can be passed through props as well. The constant is declared here for convenience
-const itemsList = [1,2,3,4,5,6,7];
 
 export function ListItemsForNavigation(props) {
-	
+
+	const {itemsList} = useContext(AppContext)
     const [selectedIndex] = useFocus(itemsList)
 
     if(!itemsList || itemsList.length < 1) return null

@@ -41,7 +41,7 @@ export function PlayerStatus() {
 
 	return (
 		<div>
-			<h1>status: {status}</h1>
+			<h1>status: <span style={{color: status === "Online" ? "green": "yellow"}}>{status} </span></h1>
 			<h3>status changes: {counter}</h3>
 			<button onClick={onToggleStatus}>Toggle status</button>
 		</div>
